@@ -30,8 +30,8 @@ namespace Move {
             "ZXIYASACKAkSKgoEdHlwZRgCIAEoDjIWLm1vdmUuUGVyc29uLlBob25lVHlw",
             "ZToESE9NRSIrCglQaG9uZVR5cGUSCgoGTU9CSUxFEAASCAoESE9NRRABEggK",
             "BFdPUksQAiIrCgtBZGRyZXNzQm9vaxIcCgZwZW9wbGUYASADKAsyDC5tb3Zl",
-            "LlBlcnNvbiJVCghNb3ZlSW5mbxILCgNkaXIYASABKAgSEAoIc3Bpbm5pbmcY",
-            "AiABKAgSDQoFY3RpbWUYAyABKAMSDQoFc3RpbWUYBCABKAMSDAoEZmlyZRgF",
+            "LlBlcnNvbiJVCghNb3ZlSW5mbxILCgNkaXIYASABKAISEAoIc3Bpbm5pbmcY",
+            "AiABKAISDQoFY3RpbWUYAyABKAMSDQoFc3RpbWUYBCABKAMSDAoEZmlyZRgF",
             "IAEoCSI+CgxDU1BsYXllck1vdmUSEAoIcGxheWVySWQYASABKAMSHAoEbW92",
             "ZRgCIAEoCzIOLm1vdmUuTW92ZUluZm8iPgoMU0NQbGF5ZXJNb3ZlEhAKCHBs",
             "YXllcklkGAEgASgDEhwKBG1vdmUYAiABKAsyDi5tb3ZlLk1vdmVJbmZvQiUK",
@@ -657,14 +657,14 @@ namespace Move {
 
     /// <summary>Field number for the "dir" field.</summary>
     public const int DirFieldNumber = 1;
-    private readonly static bool DirDefaultValue = false;
+    private readonly static float DirDefaultValue = 0F;
 
-    private bool dir_;
+    private float dir_;
     /// <summary>
     ///前后
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Dir {
+    public float Dir {
       get { if ((_hasBits0 & 1) != 0) { return dir_; } else { return DirDefaultValue; } }
       set {
         _hasBits0 |= 1;
@@ -684,14 +684,14 @@ namespace Move {
 
     /// <summary>Field number for the "spinning" field.</summary>
     public const int SpinningFieldNumber = 2;
-    private readonly static bool SpinningDefaultValue = false;
+    private readonly static float SpinningDefaultValue = 0F;
 
-    private bool spinning_;
+    private float spinning_;
     /// <summary>
     ///旋转
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Spinning {
+    public float Spinning {
       get { if ((_hasBits0 & 2) != 0) { return spinning_; } else { return SpinningDefaultValue; } }
       set {
         _hasBits0 |= 2;
@@ -802,8 +802,8 @@ namespace Move {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Dir != other.Dir) return false;
-      if (Spinning != other.Spinning) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Dir, other.Dir)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Spinning, other.Spinning)) return false;
       if (Ctime != other.Ctime) return false;
       if (Stime != other.Stime) return false;
       if (Fire != other.Fire) return false;
@@ -813,8 +813,8 @@ namespace Move {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (HasDir) hash ^= Dir.GetHashCode();
-      if (HasSpinning) hash ^= Spinning.GetHashCode();
+      if (HasDir) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Dir);
+      if (HasSpinning) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Spinning);
       if (HasCtime) hash ^= Ctime.GetHashCode();
       if (HasStime) hash ^= Stime.GetHashCode();
       if (HasFire) hash ^= Fire.GetHashCode();
@@ -832,12 +832,12 @@ namespace Move {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       if (HasDir) {
-        output.WriteRawTag(8);
-        output.WriteBool(Dir);
+        output.WriteRawTag(13);
+        output.WriteFloat(Dir);
       }
       if (HasSpinning) {
-        output.WriteRawTag(16);
-        output.WriteBool(Spinning);
+        output.WriteRawTag(21);
+        output.WriteFloat(Spinning);
       }
       if (HasCtime) {
         output.WriteRawTag(24);
@@ -860,10 +860,10 @@ namespace Move {
     public int CalculateSize() {
       int size = 0;
       if (HasDir) {
-        size += 1 + 1;
+        size += 1 + 4;
       }
       if (HasSpinning) {
-        size += 1 + 1;
+        size += 1 + 4;
       }
       if (HasCtime) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Ctime);
@@ -911,12 +911,12 @@ namespace Move {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            Dir = input.ReadBool();
+          case 13: {
+            Dir = input.ReadFloat();
             break;
           }
-          case 16: {
-            Spinning = input.ReadBool();
+          case 21: {
+            Spinning = input.ReadFloat();
             break;
           }
           case 24: {

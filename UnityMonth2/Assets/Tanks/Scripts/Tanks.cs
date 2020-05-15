@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Google.Protobuf;
+using Move;
 using UnityEngine;
 
 public class Tanks : MonoBehaviour
@@ -28,10 +30,28 @@ public class Tanks : MonoBehaviour
     void Update()
     {
         //调用方法
-        float t = Time.time;
+        long playerId = MainManager.Instance.PlayerManager.PlayerId;
+        float horizontal = Input.GetAxisRaw("Horizontal"+id);
+        float vertical = Input.GetAxisRaw("Vertical"+id);
+
+        if (id == playerId)
+        {
+            CSPlayerMove csPlayerMove = new CSPlayerMove();
+            csPlayerMove.PlayerId = id;
+            csPlayerMove.Move = new MoveInfo();
+            csPlayerMove.Move.Ctime = 0;
+            csPlayerMove.Move.Dir = vertical;
+            csPlayerMove.Move.Spinning = horizontal;
+            csPlayerMove.Move.Fire = "";
+            csPlayerMove.Move.Stime = 0;
+            byte[] bytes = csPlayerMove.ToByteArray();
+            Protocol protocol = new Protocol((int) CodeNet.CSPlayerMove, bytes.Length, playerId, bytes);
+            MainManager.Instance.NetManager.UdpManager.write(protocol);
+        }
+   
         //Debug.Log(t);
         //TanksMove();
-        TanksAttack();
+        //TanksAttack();
     }
 
     Rigidbody rig;
@@ -51,18 +71,31 @@ public class Tanks : MonoBehaviour
 
         
         //添加方法使
-        //
-        
-        
+        SCPlayerMove csPlayerMove=SCPlayerMove.Parser.ParseFrom(protocol.Probuffer);
+        long playerid=protocol.Pid;
+        float horizontalc=csPlayerMove.Move.Spinning;
+        float verticalc=csPlayerMove.Move.Spinning;
+
+        if (playerid == id)
+        {
+            rig.velocity = transform.forward * verticalc * speed;
+            if (verticalc > 0)
+                rig.angularVelocity = transform.up * horizontalc * speed;
+            else
+                rig.angularVelocity = transform.up * -horizontalc * speed;
+        }
+
+
+
         //移动方式二
         //GetAxisRaw(没有惯性)
-        float horizontal = Input.GetAxisRaw("Horizontal"+id);
-        float vertical = Input.GetAxisRaw("Vertical" + id);
-        rig.velocity = transform.forward * vertical * speed;
-        if (vertical > 0)
-            rig.angularVelocity = transform.up * horizontal * speed;
-        else
-            rig.angularVelocity = transform.up * -horizontal * speed;
+//        float horizontal = Input.GetAxisRaw("Horizontal"+id);
+//        float vertical = Input.GetAxisRaw("Vertical" + id);
+//        rig.velocity = transform.forward * vertical * speed;
+//        if (vertical > 0)
+//            rig.angularVelocity = transform.up * horizontal * speed;
+//        else
+//            rig.angularVelocity = transform.up * -horizontal * speed;
     }
 
     public KeyCode AttackKey;

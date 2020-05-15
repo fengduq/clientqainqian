@@ -83,9 +83,9 @@ public class UdpManager
         }
     }
 
-    public void write()
+    public void write(Protocol protocol)
     {
-        socket.SendTo(Encoding.ASCII.GetBytes("当前"), sEndPoint);
+        udpClient.Send(protocol.toArray(), protocol.toArray().Length, sEndPoint);
     }
 
 
