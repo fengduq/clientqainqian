@@ -14,8 +14,17 @@ public class MainManager
 
     private NetManager _netManager;
 
+    private PlayerManager _playerManager;
+    
+    
     private int _state;
 
+    public PlayerManager PlayerManager
+    {
+        get => _playerManager;
+        set => _playerManager = value;
+    }
+    
     public int State
     {
         get => _state;

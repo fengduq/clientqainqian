@@ -58,14 +58,19 @@ public class TcpManager
         //表示不需要进行字符串拼接 
         byte[] data = (byte[]) result.AsyncState;
         int len;
+        long pid;
         if (_cacheData == null){
             Array.Reverse(data, 0, 2);
             short code = BitConverter.ToInt16(data, 0);
             Array.Reverse(data, 2, 4);
             len = BitConverter.ToInt32(data, 2);
+            Array.Reverse(data, 6, 8);
+            pid = BitConverter.ToInt64(data, 6);
+            
+            
             //如果说len大于了1018表示应该分片 表示数据超过了一个分片
-            if (len > 1018){
-                _cacheData=new byte[len+6];
+            if (len > 1010){
+                _cacheData=new byte[len+14];
                 data.CopyTo(_cacheData,0);
                 _cacheLenth = 1024;
                 int count = 0;
@@ -92,13 +97,16 @@ public class TcpManager
     private void bigReceive()
     {
         //表示需字符串拼接了
-        int len=BitConverter.ToInt16(_cacheData, 2);
+       // int len=BitConverter.ToInt16(_cacheData, 2);
         //表示已经全部都获取了数据
         short code = BitConverter.ToInt16(_cacheData, 0);
-        len = BitConverter.ToInt32(_cacheData, 2);
+        int len = BitConverter.ToInt32(_cacheData, 2);
+        long pid = BitConverter.ToInt64(_cacheData, 6);
+        
+        
         byte[] newCache =new byte[len];
-        Array.Copy(_cacheData,6,newCache,0,_cacheData.Length-6);
-        Protocol protocol =new Protocol(code,len,newCache);
+        Array.Copy(_cacheData,14,newCache,0,_cacheData.Length-14);
+        Protocol protocol =new Protocol(code,len,pid,newCache);
         _cacheData = null;
         _cacheLenth = 0;
         _list.Enqueue(protocol);

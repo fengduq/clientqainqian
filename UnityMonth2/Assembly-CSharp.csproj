@@ -158,6 +158,7 @@
     <Compile Include="Assets\Tanks\Scripts\main\net\Bean\protocol\net\Move.cs" />
     <Compile Include="Assets\Tanks\Scripts\main\net\CodeNet.cs" />
     <Compile Include="Assets\Tanks\Scripts\main\net\NetManager.cs" />
+    <Compile Include="Assets\Tanks\Scripts\main\net\PlayerManager.cs" />
     <Compile Include="Assets\Tanks\Scripts\main\net\TcpManager.cs" />
     <Compile Include="Assets\Tanks\Scripts\main\net\UdpManager.cs" />
     <Compile Include="Assets\Tanks\Scripts\main\RectTransformDemo.cs" />

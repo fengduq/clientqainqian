@@ -16,7 +16,7 @@ namespace Move {
 
     #region Descriptor
     /// <summary>File descriptor for move.proto</summary>
-    public static pbr::FileDescriptor Descriptor { 
+    public static pbr::FileDescriptor Descriptor {
       get { return descriptor; }
     }
     private static pbr::FileDescriptor descriptor;
@@ -30,12 +30,20 @@ namespace Move {
             "ZXIYASACKAkSKgoEdHlwZRgCIAEoDjIWLm1vdmUuUGVyc29uLlBob25lVHlw",
             "ZToESE9NRSIrCglQaG9uZVR5cGUSCgoGTU9CSUxFEAASCAoESE9NRRABEggK",
             "BFdPUksQAiIrCgtBZGRyZXNzQm9vaxIcCgZwZW9wbGUYASADKAsyDC5tb3Zl",
-            "LlBlcnNvbkIfChFjb20ucHJvdG9jb2wubW92ZUIKUGVyc29uTW92ZQ=="));
+            "LlBlcnNvbiI1CghNb3ZlSW5mbxILCgNkaXIYAiABKAUSDQoFY3RpbWUYAyAB",
+            "KAMSDQoFc3RpbWUYBCABKAMiPgoMQ1NQbGF5ZXJNb3ZlEhAKCHBsYXllcklk",
+            "GAEgASgDEhwKBG1vdmUYAiABKAsyDi5tb3ZlLk1vdmVJbmZvIj4KDFNDUGxh",
+            "eWVyTW92ZRIQCghwbGF5ZXJJZBgBIAEoAxIcCgRtb3ZlGAIgASgLMg4ubW92",
+            "ZS5Nb3ZlSW5mb0IlChdmaXJzdC5jb20ucHJvdG9jb2wubW92ZUIKUGVyc29u",
+            "TW92ZQ=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Move.Person), global::Move.Person.Parser, new[]{ "Name", "Id", "Email", "Phones" }, null, new[]{ typeof(global::Move.Person.Types.PhoneType) }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Move.Person.Types.PhoneNumber), global::Move.Person.Types.PhoneNumber.Parser, new[]{ "Number", "Type" }, null, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Move.AddressBook), global::Move.AddressBook.Parser, new[]{ "People" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Move.AddressBook), global::Move.AddressBook.Parser, new[]{ "People" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Move.MoveInfo), global::Move.MoveInfo.Parser, new[]{ "Dir", "Ctime", "Stime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Move.CSPlayerMove), global::Move.CSPlayerMove.Parser, new[]{ "PlayerId", "Move" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Move.SCPlayerMove), global::Move.SCPlayerMove.Parser, new[]{ "PlayerId", "Move" }, null, null, null, null)
           }));
     }
     #endregion
@@ -596,6 +604,617 @@ namespace Move {
             break;
           case 10: {
             people_.AddEntriesFrom(input, _repeated_people_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///移動实体
+  /// </summary>
+  public sealed partial class MoveInfo : pb::IMessage<MoveInfo> {
+    private static readonly pb::MessageParser<MoveInfo> _parser = new pb::MessageParser<MoveInfo>(() => new MoveInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    private int _hasBits0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MoveInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Move.MoveReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveInfo(MoveInfo other) : this() {
+      _hasBits0 = other._hasBits0;
+      dir_ = other.dir_;
+      ctime_ = other.ctime_;
+      stime_ = other.stime_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveInfo Clone() {
+      return new MoveInfo(this);
+    }
+
+    /// <summary>Field number for the "dir" field.</summary>
+    public const int DirFieldNumber = 2;
+    private readonly static int DirDefaultValue = 0;
+
+    private int dir_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Dir {
+      get { if ((_hasBits0 & 1) != 0) { return dir_; } else { return DirDefaultValue; } }
+      set {
+        _hasBits0 |= 1;
+        dir_ = value;
+      }
+    }
+    /// <summary>Gets whether the "dir" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasDir {
+      get { return (_hasBits0 & 1) != 0; }
+    }
+    /// <summary>Clears the value of the "dir" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearDir() {
+      _hasBits0 &= ~1;
+    }
+
+    /// <summary>Field number for the "ctime" field.</summary>
+    public const int CtimeFieldNumber = 3;
+    private readonly static long CtimeDefaultValue = 0L;
+
+    private long ctime_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Ctime {
+      get { if ((_hasBits0 & 2) != 0) { return ctime_; } else { return CtimeDefaultValue; } }
+      set {
+        _hasBits0 |= 2;
+        ctime_ = value;
+      }
+    }
+    /// <summary>Gets whether the "ctime" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasCtime {
+      get { return (_hasBits0 & 2) != 0; }
+    }
+    /// <summary>Clears the value of the "ctime" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearCtime() {
+      _hasBits0 &= ~2;
+    }
+
+    /// <summary>Field number for the "stime" field.</summary>
+    public const int StimeFieldNumber = 4;
+    private readonly static long StimeDefaultValue = 0L;
+
+    private long stime_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Stime {
+      get { if ((_hasBits0 & 4) != 0) { return stime_; } else { return StimeDefaultValue; } }
+      set {
+        _hasBits0 |= 4;
+        stime_ = value;
+      }
+    }
+    /// <summary>Gets whether the "stime" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasStime {
+      get { return (_hasBits0 & 4) != 0; }
+    }
+    /// <summary>Clears the value of the "stime" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearStime() {
+      _hasBits0 &= ~4;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MoveInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MoveInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Dir != other.Dir) return false;
+      if (Ctime != other.Ctime) return false;
+      if (Stime != other.Stime) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (HasDir) hash ^= Dir.GetHashCode();
+      if (HasCtime) hash ^= Ctime.GetHashCode();
+      if (HasStime) hash ^= Stime.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (HasDir) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Dir);
+      }
+      if (HasCtime) {
+        output.WriteRawTag(24);
+        output.WriteInt64(Ctime);
+      }
+      if (HasStime) {
+        output.WriteRawTag(32);
+        output.WriteInt64(Stime);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (HasDir) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Dir);
+      }
+      if (HasCtime) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Ctime);
+      }
+      if (HasStime) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Stime);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MoveInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.HasDir) {
+        Dir = other.Dir;
+      }
+      if (other.HasCtime) {
+        Ctime = other.Ctime;
+      }
+      if (other.HasStime) {
+        Stime = other.Stime;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 16: {
+            Dir = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Ctime = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            Stime = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///3-移動
+  /// </summary>
+  public sealed partial class CSPlayerMove : pb::IMessage<CSPlayerMove> {
+    private static readonly pb::MessageParser<CSPlayerMove> _parser = new pb::MessageParser<CSPlayerMove>(() => new CSPlayerMove());
+    private pb::UnknownFieldSet _unknownFields;
+    private int _hasBits0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CSPlayerMove> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Move.MoveReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CSPlayerMove() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CSPlayerMove(CSPlayerMove other) : this() {
+      _hasBits0 = other._hasBits0;
+      playerId_ = other.playerId_;
+      move_ = other.HasMove ? other.move_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CSPlayerMove Clone() {
+      return new CSPlayerMove(this);
+    }
+
+    /// <summary>Field number for the "playerId" field.</summary>
+    public const int PlayerIdFieldNumber = 1;
+    private readonly static long PlayerIdDefaultValue = 0L;
+
+    private long playerId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long PlayerId {
+      get { if ((_hasBits0 & 1) != 0) { return playerId_; } else { return PlayerIdDefaultValue; } }
+      set {
+        _hasBits0 |= 1;
+        playerId_ = value;
+      }
+    }
+    /// <summary>Gets whether the "playerId" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasPlayerId {
+      get { return (_hasBits0 & 1) != 0; }
+    }
+    /// <summary>Clears the value of the "playerId" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearPlayerId() {
+      _hasBits0 &= ~1;
+    }
+
+    /// <summary>Field number for the "move" field.</summary>
+    public const int MoveFieldNumber = 2;
+    private global::Move.MoveInfo move_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Move.MoveInfo Move {
+      get { return move_; }
+      set {
+        move_ = value;
+      }
+    }
+    /// <summary>Gets whether the move field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasMove {
+      get { return move_ != null; }
+    }
+    /// <summary>Clears the value of the move field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearMove() {
+      move_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CSPlayerMove);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CSPlayerMove other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PlayerId != other.PlayerId) return false;
+      if (!object.Equals(Move, other.Move)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (HasPlayerId) hash ^= PlayerId.GetHashCode();
+      if (HasMove) hash ^= Move.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (HasPlayerId) {
+        output.WriteRawTag(8);
+        output.WriteInt64(PlayerId);
+      }
+      if (HasMove) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Move);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (HasPlayerId) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(PlayerId);
+      }
+      if (HasMove) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Move);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CSPlayerMove other) {
+      if (other == null) {
+        return;
+      }
+      if (other.HasPlayerId) {
+        PlayerId = other.PlayerId;
+      }
+      if (other.HasMove) {
+        if (!HasMove) {
+          Move = new global::Move.MoveInfo();
+        }
+        Move.MergeFrom(other.Move);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            PlayerId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            if (!HasMove) {
+              Move = new global::Move.MoveInfo();
+            }
+            input.ReadMessage(Move);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///4-移動返回
+  /// </summary>
+  public sealed partial class SCPlayerMove : pb::IMessage<SCPlayerMove> {
+    private static readonly pb::MessageParser<SCPlayerMove> _parser = new pb::MessageParser<SCPlayerMove>(() => new SCPlayerMove());
+    private pb::UnknownFieldSet _unknownFields;
+    private int _hasBits0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SCPlayerMove> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Move.MoveReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SCPlayerMove() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SCPlayerMove(SCPlayerMove other) : this() {
+      _hasBits0 = other._hasBits0;
+      playerId_ = other.playerId_;
+      move_ = other.HasMove ? other.move_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SCPlayerMove Clone() {
+      return new SCPlayerMove(this);
+    }
+
+    /// <summary>Field number for the "playerId" field.</summary>
+    public const int PlayerIdFieldNumber = 1;
+    private readonly static long PlayerIdDefaultValue = 0L;
+
+    private long playerId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long PlayerId {
+      get { if ((_hasBits0 & 1) != 0) { return playerId_; } else { return PlayerIdDefaultValue; } }
+      set {
+        _hasBits0 |= 1;
+        playerId_ = value;
+      }
+    }
+    /// <summary>Gets whether the "playerId" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasPlayerId {
+      get { return (_hasBits0 & 1) != 0; }
+    }
+    /// <summary>Clears the value of the "playerId" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearPlayerId() {
+      _hasBits0 &= ~1;
+    }
+
+    /// <summary>Field number for the "move" field.</summary>
+    public const int MoveFieldNumber = 2;
+    private global::Move.MoveInfo move_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Move.MoveInfo Move {
+      get { return move_; }
+      set {
+        move_ = value;
+      }
+    }
+    /// <summary>Gets whether the move field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasMove {
+      get { return move_ != null; }
+    }
+    /// <summary>Clears the value of the move field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearMove() {
+      move_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SCPlayerMove);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SCPlayerMove other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PlayerId != other.PlayerId) return false;
+      if (!object.Equals(Move, other.Move)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (HasPlayerId) hash ^= PlayerId.GetHashCode();
+      if (HasMove) hash ^= Move.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (HasPlayerId) {
+        output.WriteRawTag(8);
+        output.WriteInt64(PlayerId);
+      }
+      if (HasMove) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Move);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (HasPlayerId) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(PlayerId);
+      }
+      if (HasMove) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Move);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SCPlayerMove other) {
+      if (other == null) {
+        return;
+      }
+      if (other.HasPlayerId) {
+        PlayerId = other.PlayerId;
+      }
+      if (other.HasMove) {
+        if (!HasMove) {
+          Move = new global::Move.MoveInfo();
+        }
+        Move.MergeFrom(other.Move);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            PlayerId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            if (!HasMove) {
+              Move = new global::Move.MoveInfo();
+            }
+            input.ReadMessage(Move);
             break;
           }
         }

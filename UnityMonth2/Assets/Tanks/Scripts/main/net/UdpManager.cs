@@ -10,6 +10,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using Google.Protobuf;
+using Login;
+
 //tcp就到这
 
 /**
@@ -27,20 +30,26 @@ public class UdpManager
     
     UdpClient udpClient ;
 
+    public UdpManager()
+    {
+        _list =new ConcurrentQueue<Protocol>();
+    }
+
     public ConcurrentQueue<Protocol> List => _list;
     
     //创建的发送消息的 
     //private IPEndPoint recivePoint;
     
     
+    
+    
     public void UDPInit(String ip, int port)
     {
         socket = new Socket(AddressFamily.InterNetwork,SocketType.Dgram,ProtocolType.Udp);
-        _list =new ConcurrentQueue<Protocol>();
         sEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
         udpClient =new UdpClient(0);
         //创建一个接收线程 这块位置是创建一个连接 能够让服务器知道这个channel 存在 不然服务器不知道这个channel是否存在
-        connnect();
+        Connnect();
         Thread thread =new Thread(ReciveMethod);
         thread.Start();
     }
@@ -48,12 +57,15 @@ public class UdpManager
     
     
     
-    public void connnect()
+    public void Connnect()
     {
         udpClient =new UdpClient(0);
-        byte[] bytes =new byte[1024];
-        bytes=Encoding.UTF8.GetBytes("connect");
-        udpClient.Send(bytes, bytes.Length, sEndPoint);
+        CSUDP csudp=new CSUDP();
+        csudp.PlayerId = MainManager.Instance.PlayerManager.PlayerId;
+        byte[] bytes = csudp.ToByteArray();
+        Protocol protocol =new Protocol((int)CodeNet.CSUDP,bytes.Length,csudp.PlayerId,bytes);
+        udpClient.Send(protocol.toArray(), protocol.toArray().Length, sEndPoint);
+        Debug.Log("connect 发送");
     }
 
 
@@ -66,7 +78,7 @@ public class UdpManager
             IPEndPoint recivePoint =new IPEndPoint(IPAddress.Any, 0);
             receiveBuffer=udpClient.Receive(ref recivePoint);
             //string str = Encoding.UTF8.GetString(receiveBuffer,0,receiveBuffer.Length);
-            Protocol protocol=NetManager.ProtocolParse(receiveBuffer);
+            Protocol protocol=NetManager.ProtocolUDPParse(receiveBuffer);
             _list.Enqueue(protocol);
         }
     }

@@ -17,8 +17,7 @@ public class GameBegain : MonoBehaviour
         MainManager.Instance.State = (int)State.begain;
         mainManager.UiMananger=new UIMananger();
         mainManager.NetManager=new NetManager("192.168.1.9",12306,"192.168.1.9",12310);
-
-        
+        mainManager.PlayerManager=new PlayerManager();
     }
 
     // Update is called once per frame

@@ -82,7 +82,7 @@ public class NetManager
                 Protocol protocol;
                 queue.TryDequeue(out protocol);
                 int code = protocol.Code;
-                _dictionary[code]();
+                _dictionary[code](protocol);
             }
         }
     }
@@ -97,7 +97,7 @@ public class NetManager
                 Protocol protocol;
                 queue.TryDequeue(out protocol);
                 int code = protocol.Code;
-                _dictionary[code]();
+                _dictionary[code](protocol);
             }
         }
     }
@@ -109,12 +109,35 @@ public class NetManager
     {
         short code = BitConverter.ToInt16(data, 0);
         int len = BitConverter.ToInt32(data, 2);
+        long pid = BitConverter.ToInt64(data, 6);
+        
+        
         byte[] newCache = new byte[len];
         for (int i = 0; i < len; i++)
         {
-            newCache[i] = data[6 + i];
+            newCache[i] = data[14 + i];
         }
-        Protocol protocal = new Protocol(code, len, newCache);
+        Protocol protocal = new Protocol(code, len, pid,newCache);
         return protocal;
     }
+    
+    public static Protocol ProtocolUDPParse(byte[] data)
+    {
+        Array.Reverse(data, 0, 2);
+        short code =BitConverter.ToInt16(data, 0);
+        Array.Reverse(data, 2, 4);
+        int len = BitConverter.ToInt32(data, 2);
+        Array.Reverse(data, 6, 8);
+        long pid = BitConverter.ToInt64(data, 6);
+        
+        
+        byte[] newCache = new byte[len];
+        for (int i = 0; i < len; i++)
+        {
+            newCache[i] = data[14 + i];
+        }
+        Protocol protocal = new Protocol(code, len, pid,newCache);
+        return protocal;
+    }
+    
 }
