@@ -19,6 +19,9 @@ public class Tanks : MonoBehaviour
     {
         rig = GetComponent<Rigidbody>();
         spawnController = GetComponentInChildren<SpawnController>();
+        Do dele = TanksMove;
+        MainManager.Instance.NetManager.Dictionary.Add((int) CodeNet.SCPlayerMove, dele);
+
     }
     
 
@@ -27,7 +30,7 @@ public class Tanks : MonoBehaviour
         //调用方法
         float t = Time.time;
         //Debug.Log(t);
-        TanksMove();
+        //TanksMove();
         TanksAttack();
     }
 
@@ -36,8 +39,8 @@ public class Tanks : MonoBehaviour
     [SerializeField]
     int speed = 20,id;
 
-    //坦克移动的方法
-    private void TanksMove()
+    //坦克移动的方法 回调实现
+    private void TanksMove(Protocol protocol)
     {
         //移动方式一
         //float horizontal = Input.GetAxis("Horizontal");
@@ -46,6 +49,11 @@ public class Tanks : MonoBehaviour
         //float vertical = Input.GetAxis("Vertical");
         //rig.velocity = transform.forward * vertical * speed;
 
+        
+        //添加方法使
+        
+        
+        
         //移动方式二
         //GetAxisRaw(没有惯性)
         float horizontal = Input.GetAxisRaw("Horizontal"+id);

@@ -30,18 +30,18 @@ namespace Move {
             "ZXIYASACKAkSKgoEdHlwZRgCIAEoDjIWLm1vdmUuUGVyc29uLlBob25lVHlw",
             "ZToESE9NRSIrCglQaG9uZVR5cGUSCgoGTU9CSUxFEAASCAoESE9NRRABEggK",
             "BFdPUksQAiIrCgtBZGRyZXNzQm9vaxIcCgZwZW9wbGUYASADKAsyDC5tb3Zl",
-            "LlBlcnNvbiI1CghNb3ZlSW5mbxILCgNkaXIYAiABKAUSDQoFY3RpbWUYAyAB",
-            "KAMSDQoFc3RpbWUYBCABKAMiPgoMQ1NQbGF5ZXJNb3ZlEhAKCHBsYXllcklk",
-            "GAEgASgDEhwKBG1vdmUYAiABKAsyDi5tb3ZlLk1vdmVJbmZvIj4KDFNDUGxh",
-            "eWVyTW92ZRIQCghwbGF5ZXJJZBgBIAEoAxIcCgRtb3ZlGAIgASgLMg4ubW92",
-            "ZS5Nb3ZlSW5mb0IlChdmaXJzdC5jb20ucHJvdG9jb2wubW92ZUIKUGVyc29u",
-            "TW92ZQ=="));
+            "LlBlcnNvbiJVCghNb3ZlSW5mbxILCgNkaXIYASABKAgSEAoIc3Bpbm5pbmcY",
+            "AiABKAgSDQoFY3RpbWUYAyABKAMSDQoFc3RpbWUYBCABKAMSDAoEZmlyZRgF",
+            "IAEoCSI+CgxDU1BsYXllck1vdmUSEAoIcGxheWVySWQYASABKAMSHAoEbW92",
+            "ZRgCIAEoCzIOLm1vdmUuTW92ZUluZm8iPgoMU0NQbGF5ZXJNb3ZlEhAKCHBs",
+            "YXllcklkGAEgASgDEhwKBG1vdmUYAiABKAsyDi5tb3ZlLk1vdmVJbmZvQiUK",
+            "F2ZpcnN0LmNvbS5wcm90b2NvbC5tb3ZlQgpQZXJzb25Nb3Zl"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Move.Person), global::Move.Person.Parser, new[]{ "Name", "Id", "Email", "Phones" }, null, new[]{ typeof(global::Move.Person.Types.PhoneType) }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Move.Person.Types.PhoneNumber), global::Move.Person.Types.PhoneNumber.Parser, new[]{ "Number", "Type" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Move.AddressBook), global::Move.AddressBook.Parser, new[]{ "People" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Move.MoveInfo), global::Move.MoveInfo.Parser, new[]{ "Dir", "Ctime", "Stime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Move.MoveInfo), global::Move.MoveInfo.Parser, new[]{ "Dir", "Spinning", "Ctime", "Stime", "Fire" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Move.CSPlayerMove), global::Move.CSPlayerMove.Parser, new[]{ "PlayerId", "Move" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Move.SCPlayerMove), global::Move.SCPlayerMove.Parser, new[]{ "PlayerId", "Move" }, null, null, null, null)
           }));
@@ -643,8 +643,10 @@ namespace Move {
     public MoveInfo(MoveInfo other) : this() {
       _hasBits0 = other._hasBits0;
       dir_ = other.dir_;
+      spinning_ = other.spinning_;
       ctime_ = other.ctime_;
       stime_ = other.stime_;
+      fire_ = other.fire_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -654,12 +656,15 @@ namespace Move {
     }
 
     /// <summary>Field number for the "dir" field.</summary>
-    public const int DirFieldNumber = 2;
-    private readonly static int DirDefaultValue = 0;
+    public const int DirFieldNumber = 1;
+    private readonly static bool DirDefaultValue = false;
 
-    private int dir_;
+    private bool dir_;
+    /// <summary>
+    ///前后
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Dir {
+    public bool Dir {
       get { if ((_hasBits0 & 1) != 0) { return dir_; } else { return DirDefaultValue; } }
       set {
         _hasBits0 |= 1;
@@ -677,28 +682,58 @@ namespace Move {
       _hasBits0 &= ~1;
     }
 
+    /// <summary>Field number for the "spinning" field.</summary>
+    public const int SpinningFieldNumber = 2;
+    private readonly static bool SpinningDefaultValue = false;
+
+    private bool spinning_;
+    /// <summary>
+    ///旋转
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Spinning {
+      get { if ((_hasBits0 & 2) != 0) { return spinning_; } else { return SpinningDefaultValue; } }
+      set {
+        _hasBits0 |= 2;
+        spinning_ = value;
+      }
+    }
+    /// <summary>Gets whether the "spinning" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasSpinning {
+      get { return (_hasBits0 & 2) != 0; }
+    }
+    /// <summary>Clears the value of the "spinning" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearSpinning() {
+      _hasBits0 &= ~2;
+    }
+
     /// <summary>Field number for the "ctime" field.</summary>
     public const int CtimeFieldNumber = 3;
     private readonly static long CtimeDefaultValue = 0L;
 
     private long ctime_;
+    /// <summary>
+    ///客户端时间
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Ctime {
-      get { if ((_hasBits0 & 2) != 0) { return ctime_; } else { return CtimeDefaultValue; } }
+      get { if ((_hasBits0 & 4) != 0) { return ctime_; } else { return CtimeDefaultValue; } }
       set {
-        _hasBits0 |= 2;
+        _hasBits0 |= 4;
         ctime_ = value;
       }
     }
     /// <summary>Gets whether the "ctime" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool HasCtime {
-      get { return (_hasBits0 & 2) != 0; }
+      get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "ctime" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void ClearCtime() {
-      _hasBits0 &= ~2;
+      _hasBits0 &= ~4;
     }
 
     /// <summary>Field number for the "stime" field.</summary>
@@ -706,23 +741,52 @@ namespace Move {
     private readonly static long StimeDefaultValue = 0L;
 
     private long stime_;
+    /// <summary>
+    ///服务器时间
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Stime {
-      get { if ((_hasBits0 & 4) != 0) { return stime_; } else { return StimeDefaultValue; } }
+      get { if ((_hasBits0 & 8) != 0) { return stime_; } else { return StimeDefaultValue; } }
       set {
-        _hasBits0 |= 4;
+        _hasBits0 |= 8;
         stime_ = value;
       }
     }
     /// <summary>Gets whether the "stime" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool HasStime {
-      get { return (_hasBits0 & 4) != 0; }
+      get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "stime" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void ClearStime() {
-      _hasBits0 &= ~4;
+      _hasBits0 &= ~8;
+    }
+
+    /// <summary>Field number for the "fire" field.</summary>
+    public const int FireFieldNumber = 5;
+    private readonly static string FireDefaultValue = "";
+
+    private string fire_;
+    /// <summary>
+    ///射击
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Fire {
+      get { return fire_ ?? FireDefaultValue; }
+      set {
+        fire_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "fire" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasFire {
+      get { return fire_ != null; }
+    }
+    /// <summary>Clears the value of the "fire" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearFire() {
+      fire_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -739,8 +803,10 @@ namespace Move {
         return true;
       }
       if (Dir != other.Dir) return false;
+      if (Spinning != other.Spinning) return false;
       if (Ctime != other.Ctime) return false;
       if (Stime != other.Stime) return false;
+      if (Fire != other.Fire) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -748,8 +814,10 @@ namespace Move {
     public override int GetHashCode() {
       int hash = 1;
       if (HasDir) hash ^= Dir.GetHashCode();
+      if (HasSpinning) hash ^= Spinning.GetHashCode();
       if (HasCtime) hash ^= Ctime.GetHashCode();
       if (HasStime) hash ^= Stime.GetHashCode();
+      if (HasFire) hash ^= Fire.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -764,8 +832,12 @@ namespace Move {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       if (HasDir) {
+        output.WriteRawTag(8);
+        output.WriteBool(Dir);
+      }
+      if (HasSpinning) {
         output.WriteRawTag(16);
-        output.WriteInt32(Dir);
+        output.WriteBool(Spinning);
       }
       if (HasCtime) {
         output.WriteRawTag(24);
@@ -774,6 +846,10 @@ namespace Move {
       if (HasStime) {
         output.WriteRawTag(32);
         output.WriteInt64(Stime);
+      }
+      if (HasFire) {
+        output.WriteRawTag(42);
+        output.WriteString(Fire);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -784,13 +860,19 @@ namespace Move {
     public int CalculateSize() {
       int size = 0;
       if (HasDir) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Dir);
+        size += 1 + 1;
+      }
+      if (HasSpinning) {
+        size += 1 + 1;
       }
       if (HasCtime) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Ctime);
       }
       if (HasStime) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Stime);
+      }
+      if (HasFire) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Fire);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -806,11 +888,17 @@ namespace Move {
       if (other.HasDir) {
         Dir = other.Dir;
       }
+      if (other.HasSpinning) {
+        Spinning = other.Spinning;
+      }
       if (other.HasCtime) {
         Ctime = other.Ctime;
       }
       if (other.HasStime) {
         Stime = other.Stime;
+      }
+      if (other.HasFire) {
+        Fire = other.Fire;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -823,8 +911,12 @@ namespace Move {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            Dir = input.ReadBool();
+            break;
+          }
           case 16: {
-            Dir = input.ReadInt32();
+            Spinning = input.ReadBool();
             break;
           }
           case 24: {
@@ -833,6 +925,10 @@ namespace Move {
           }
           case 32: {
             Stime = input.ReadInt64();
+            break;
+          }
+          case 42: {
+            Fire = input.ReadString();
             break;
           }
         }
