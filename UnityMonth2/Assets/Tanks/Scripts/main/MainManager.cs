@@ -15,10 +15,19 @@ public class MainManager
     private NetManager _netManager;
 
     private PlayerManager _playerManager;
-    
+
+    //消息的回调
+    private CallBack _callBack;
     
     private int _state;
 
+
+    public CallBack CallBack
+    {
+        get => _callBack;
+        set => _callBack = value;
+    }
+    
     public PlayerManager PlayerManager
     {
         get => _playerManager;

@@ -20,37 +20,8 @@ public class EventDemo : MonoBehaviour
 
     //收到连接成功的消息
     private bool _enter = false;
-
-    private void SCPlayerLoginFun(Protocol protocol)
-    {
-        Debug.Log("当前收到SCPlayerLogin");
-        
-        SCPlayerLogin scPlayerLogin = SCPlayerLogin.Parser.ParseFrom(protocol.Probuffer);
-        long playerid = scPlayerLogin.PlayerId[0];
-        MainManager.Instance.PlayerManager.PlayerId = playerid;
-
-        NetManager udpManager = MainManager.Instance.NetManager;
-        udpManager.UdpManager.UDPInit(udpManager.Udpip, udpManager.Udpport);
-    }
-
-
-    private void SCUDPFun(Protocol protocol)
-    {
-        Debug.Log("当前收到SCUDP");
-        SCUDP scudp = SCUDP.Parser.ParseFrom(protocol.Probuffer);
-        MainManager.Instance.PlayerManager.PlayerEnemy=new long[ scudp.PlayerId.Count-1];
-        long playerid_first = scudp.PlayerId[0];
-        long playerid_second = scudp.PlayerId[1];
-        if (playerid_first == MainManager.Instance.PlayerManager.PlayerId){
-            MainManager.Instance.PlayerManager.PlayerEnemy[0] = playerid_second;
-        }
-        else{
-            MainManager.Instance.PlayerManager.PlayerEnemy[0] = playerid_first;
-        }
-        
-        Debug.Log("初始化当前的场景");
-        _enter = true;
-    }
+    
+    
 
     
     
@@ -95,12 +66,9 @@ public class EventDemo : MonoBehaviour
         
         
         //配套SCPlayerLogin 监听
-        Do dele = SCPlayerLoginFun;
-        MainManager.Instance.NetManager.Dictionary.Add((int) CodeNet.SCPlayerLogin, dele);
-        
+
         //监听
-        dele = SCUDPFun;
-        MainManager.Instance.NetManager.Dictionary.Add((int) CodeNet.SCUDP, dele);
+    
         
 //        UICallBack uiCallBack =new UICallBack();
 //        uiCallBack.GameObject = gameObject;
@@ -111,9 +79,9 @@ public class EventDemo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_enter){
+        if ( MainManager.Instance.PlayerManager.Scene ==1){
             SceneManager.LoadScene("TankScene");
-            _enter = false;
+            MainManager.Instance.PlayerManager.Scene = -1;
         }
         
     }
