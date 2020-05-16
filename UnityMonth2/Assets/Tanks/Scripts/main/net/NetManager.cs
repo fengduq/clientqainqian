@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEngine;
 
 
 public class NetManager
@@ -90,15 +91,22 @@ public class NetManager
     private void TickUdp()
     {
         ConcurrentQueue<Protocol> queue = _udpManager.List;
-        while (true)
+        try
         {
-            if (!queue.IsEmpty)
+            while (true)
             {
-                Protocol protocol;
-                queue.TryDequeue(out protocol);
-                int code = protocol.Code;
-                _dictionary[code](protocol);
+                if (!queue.IsEmpty)
+                {
+                    Protocol protocol;
+                    queue.TryDequeue(out protocol);
+                    int code = protocol.Code;
+                    _dictionary[code](protocol);
+                }
             }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.StackTrace);
         }
     }
 

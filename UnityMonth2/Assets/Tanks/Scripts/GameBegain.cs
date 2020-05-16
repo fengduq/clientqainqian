@@ -16,7 +16,7 @@ public class GameBegain : MonoBehaviour
         MainManager mainManager =MainManager.Instance;
         MainManager.Instance.State = (int)State.begain;
         mainManager.UiMananger=new UIMananger();
-        mainManager.NetManager=new NetManager("192.168.1.9",12306,"192.168.1.9",12310);
+        mainManager.NetManager=new NetManager("192.168.1.11",12306,"192.168.1.11",12310);
         mainManager.PlayerManager=new PlayerManager(new Dictionary<long, Player>());
         mainManager.CallBack =new CallBack();
         

@@ -25,7 +25,7 @@ public class Tanks : MonoBehaviour
         set => _SCPlayerQueue = value;
     }
 
-    void Start()
+    void Awake()
     {
         rig = GetComponent<Rigidbody>();
         _SCPlayerQueue =new  ConcurrentQueue<SCPlayerMove>();
@@ -39,26 +39,6 @@ public class Tanks : MonoBehaviour
 
     void Update()
     {
-        //调用方法
-        long playerId = MainManager.Instance.PlayerManager.PlayerId;
-        float horizontal = Input.GetAxisRaw("Horizontal" + id);
-        float vertical = Input.GetAxisRaw("Vertical" + id);
-
-        if (id == playerId)
-        {
-            CSPlayerMove csPlayerMove = new CSPlayerMove();
-            csPlayerMove.PlayerId = id;
-            csPlayerMove.Move = new MoveInfo();
-            csPlayerMove.Move.Ctime = 0;
-            csPlayerMove.Move.Dir = vertical;
-            csPlayerMove.Move.Spinning = horizontal;
-            csPlayerMove.Move.Fire = "";
-            csPlayerMove.Move.Stime = 0;
-            byte[] bytes = csPlayerMove.ToByteArray();
-            Protocol protocol = new Protocol((int) CodeNet.CSPlayerMove, bytes.Length, playerId, bytes);
-            MainManager.Instance.NetManager.UdpManager.write(protocol);
-        }
-
         //占时效果的代码
         int i = 0;
         while (!_SCPlayerQueue.IsEmpty)
@@ -83,6 +63,30 @@ public class Tanks : MonoBehaviour
             }
             i++;
         }
+        //调用方法
+        long playerId = MainManager.Instance.PlayerManager.PlayerId;
+        float horizontal = Input.GetAxisRaw("Horizontal" + id);
+        float vertical = Input.GetAxisRaw("Vertical" + id);
+        if (horizontal == 0 && vertical == 0){
+            return;
+        }
+
+        if (id == playerId )
+        {
+            CSPlayerMove csPlayerMove = new CSPlayerMove();
+            csPlayerMove.PlayerId = id;
+            csPlayerMove.Move = new MoveInfo();
+            csPlayerMove.Move.Ctime = 0;
+            csPlayerMove.Move.Dir = vertical;
+            csPlayerMove.Move.Spinning = horizontal;
+            csPlayerMove.Move.Fire = "";
+            csPlayerMove.Move.Stime = 0;
+            byte[] bytes = csPlayerMove.ToByteArray();
+            Protocol protocol = new Protocol((int) CodeNet.CSPlayerMove, bytes.Length, playerId, bytes);
+            MainManager.Instance.NetManager.UdpManager.write(protocol);
+        }
+
+       
 
 
         //Debug.Log(t);

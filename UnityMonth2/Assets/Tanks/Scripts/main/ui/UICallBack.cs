@@ -4,7 +4,7 @@
  * @author  zsq
  * @version 1.0
  */
-public class UICallBack : CallBack
+public class UICallBack
 {
     private GameObject _gameObject;
 
