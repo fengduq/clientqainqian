@@ -14,7 +14,12 @@ public class Tanks : MonoBehaviour
         2:通过刚体的方式来进行移动(给刚体添加一个力)
 
     */
-
+    //记录上一次的
+    private float horizontalcBefore;
+    
+    //记录上一次的
+    private float verticalcBefore;
+    
     public SpawnController spawnController;
 
     private ConcurrentQueue<SCPlayerMove> _SCPlayerQueue;
@@ -67,7 +72,7 @@ public class Tanks : MonoBehaviour
         long playerId = MainManager.Instance.PlayerManager.PlayerId;
         float horizontal = Input.GetAxisRaw("Horizontal" + id);
         float vertical = Input.GetAxisRaw("Vertical" + id);
-        if (horizontal == 0 && vertical == 0){
+        if (horizontalcBefore==0&&verticalcBefore==0&&horizontal == 0 && vertical == 0){
             return;
         }
 
@@ -85,8 +90,8 @@ public class Tanks : MonoBehaviour
             Protocol protocol = new Protocol((int) CodeNet.CSPlayerMove, bytes.Length, playerId, bytes);
             MainManager.Instance.NetManager.UdpManager.write(protocol);
         }
-
-       
+        horizontalcBefore = horizontal;
+        verticalcBefore = vertical;
 
 
         //Debug.Log(t);
