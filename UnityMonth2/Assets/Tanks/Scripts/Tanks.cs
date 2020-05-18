@@ -67,7 +67,7 @@ public class Tanks : MonoBehaviour
             _SCPlayerQueue.TryDequeue(out playerMove);
             long playerid = playerMove.PlayerId;
             float horizontalc = playerMove.Move.Spinning;
-            float verticalc = playerMove.Move.Spinning;
+            float verticalc = playerMove.Move.Dir;
             if (playerid == id)
             {
                 rig.velocity = transform.forward * verticalc * speed;
