@@ -26,7 +26,8 @@ public class CallBack
     {
         //获取坦克的控制器
         SCPlayerMove scPlayerMove = SCPlayerMove.Parser.ParseFrom(protocol.Probuffer);
-        for (int i = 0; i < MainManager.Instance.PlayerManager.Player.Count; i++) {
+        foreach (long i in MainManager.Instance.PlayerManager.Player.Keys)
+        {
             MainManager.Instance.PlayerManager.Player[i].Tanks.SCPlayerQueue.Enqueue(scPlayerMove);
         }
     }
